@@ -1,6 +1,9 @@
 <p>the server component</p>
 <div flex>
-<div>asjdlfjsld</div>
-<div>                   </div>
-<div>saldjfls</div>
+    <div>server id is {{serverId}}</div>
+    <div 
+    [ngStyle]="{backgroundColor : getColor()}"
+    [ngClass]="{online:serverCheck()}"
+    >Server status is {{serverStatus}}</div>
+    <div>Server check is {{serverCheck()}}</div>
 </div>

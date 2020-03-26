@@ -1,10 +1,17 @@
 import { Component } from '@angular/core';
 
 @Component({
-    selector:'app-server',
-    templateUrl:'./server.component.html',
-    styleUrls:['./server.component.css']
+    selector: 'app-server',
+    templateUrl: './server.component.html',
+    styleUrls: ['./server.component.css']
 })
-export class ServerComponent{
-
+export class ServerComponent {
+    serverId: number = 10;
+    serverStatus = Math.random()>0.5 ? true : false;
+    serverCheck() {
+        return this.serverStatus;
+    }
+    getColor() {
+        return this.serverStatus ? "Green" : "Red";
+    }
 }
