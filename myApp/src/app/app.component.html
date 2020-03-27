@@ -5,4 +5,11 @@
     <input type="text" [(ngModel)]=Resetter>
     <p>{{Resetter}}</p>
     <button class="btn btn-primary" (click)="onreset()" [disabled]="!Resetter">Reset</button>
+    <br><br>
+
+    <button class="btn btn-primary" (click)="toggler()">Toggler</button>
+    <p *ngIf="count%2===0" [ngStyle]="{color : color}" [ngClass]="{toggle: count>=5 }">Toggled Words</p>
+    <br>
+    <p *ngFor = "let log of toggleLog">{{toggleLog[log]}}</p>
+
 </div>

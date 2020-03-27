@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-root',
@@ -8,7 +9,16 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'myApp';
   Resetter = "";
-  onreset(){
-    this.Resetter = ""; 
+  display = 'none';
+  toggleLog = [];
+  count = 0;
+  color:string;
+  onreset() {
+    this.Resetter = "";
   }
-}
+  toggler() {
+    this.toggleLog.push(++this.count);
+    if (this.count>=5)  this.color = 'red';
+  }
+  
+} 

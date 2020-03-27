@@ -1,5 +1,4 @@
-<app-server></app-server>
-<app-server></app-server>
+<app-server  *ngFor="let server of serverList"></app-server>
 <br>
 <!-- <label for="">Server Name event binding</label>
     <input type="text" (input)="onSeverNameChange($event)"> -->
@@ -13,4 +12,4 @@
 </p>
 <ng-template #noServer>
     <p>Default Server Name</p>
-</ng-template>  
+</ng-template>
