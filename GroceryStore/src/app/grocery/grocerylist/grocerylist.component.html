@@ -1,2 +1,19 @@
-<app-groceryitem></app-groceryitem>
-<app-groceryitem></app-groceryitem>
+<div class="row">
+    <div class="col-xs-12">
+        <button class="btn btn-success">New Item</button>
+    </div>
+</div>
+<div class="row" *ngFor="let index of grocerylist">
+    <div class="col-xs-12">
+        <a href="#" class="list-group-item clearfix">
+            <div class="pull-left">
+                <h4 class="list-group-item-heading">{{index.name}}</h4>
+                <p class="list-group-item-text">{{index.description}}</p>
+            </div>
+            <span class="pull-right">
+                <img [src]="index.imagePath" alt="" class="img-responsive" style="height: 50px;">
+            </span>
+        </a>
+        <app-groceryitem></app-groceryitem>
+    </div>
+</div>
