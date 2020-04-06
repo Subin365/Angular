@@ -10,6 +10,10 @@ import { GrocerylistComponent } from './grocery/grocerylist/grocerylist.componen
 import { GroceryitemComponent } from './grocery/grocerylist/groceryitem/groceryitem.component';
 import { HeaderComponent } from './header/header.component';
 import { StyletoggleDirective } from './header/styletoggle/styletoggle.directive';
+import { ShoppingService } from './shoppinglist/shopping.service';
+import { AppRoutingModule } from './app-routing.module';
+import { GrocerystartComponent } from './grocery/grocerystart/grocerystart.component';
+import { GroceryEditComponent } from './grocery/grocery-edit/grocery-edit.component';
 
 @NgModule({
   declarations: [
@@ -21,12 +25,15 @@ import { StyletoggleDirective } from './header/styletoggle/styletoggle.directive
     GrocerylistComponent,
     GroceryitemComponent,
     HeaderComponent,
-    StyletoggleDirective
+    StyletoggleDirective,
+    GrocerystartComponent,
+    GroceryEditComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    AppRoutingModule
   ],
-  providers: [],
+  providers: [ShoppingService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

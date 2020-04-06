@@ -1,11 +1,6 @@
 <div class="col-md-5">
-    <app-grocerylist (grocerySelectedList)="selected = $event"></app-grocerylist>
+    <app-grocerylist></app-grocerylist>
 </div>
 <div class="col-md-7">
-    <app-grocerydetails *ngIf = "selected; else defaultText" [groceryItem] = "selected"></app-grocerydetails>
-    <ng-template #defaultText>
-        <p>
-            Please select a grocery.
-        </p>
-    </ng-template>
+    <router-outlet></router-outlet>
 </div>

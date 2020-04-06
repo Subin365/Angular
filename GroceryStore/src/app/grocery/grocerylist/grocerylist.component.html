@@ -1,8 +1,9 @@
 <div class="row">
     <div class="col-xs-12">
-        <button class="btn btn-success">New Item</button>
+        <button class="btn btn-success" (click) = "onNewGrocery()">New Item</button>
     </div>
 </div>
+    <br>
 <div class="row">
-    <app-groceryitem *ngFor="let index of grocerylist" [item]="index" (groceryClicked)="groceryClicked(index)"></app-groceryitem>
+    <app-groceryitem *ngFor="let index of grocerylist; let i= index" [item]="index" [index] = "i"></app-groceryitem>
 </div>

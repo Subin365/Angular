@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Grocery } from '../../grocery.model';
 
 
@@ -8,14 +8,11 @@ import { Grocery } from '../../grocery.model';
   styleUrls: ['./groceryitem.component.css']
 })
 export class GroceryitemComponent implements OnInit {
-  @Input() item:Grocery;
-  @Output() groceryClicked = new EventEmitter<void>();
+  @Input() item: Grocery;
+  @Input() index:number;
   constructor() { }
 
   ngOnInit(): void {
-  }
-  grocerySelected(){
-    this.groceryClicked.emit();
   }
 
 }

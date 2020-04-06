@@ -1,5 +1,7 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Grocery } from '../grocery.model';
+import { GroceryService } from '../grocey.service';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-grocerylist',
@@ -7,21 +9,15 @@ import { Grocery } from '../grocery.model';
   styleUrls: ['./grocerylist.component.css']
 })
 export class GrocerylistComponent implements OnInit {
-  grocerylist: Grocery[] = [
-    new Grocery("test name 1", "Test description 1", "https://storage.needpix.com/rsynced_images/grocery-2932906_1280.jpg",
-    ),
-    new Grocery("test name 2", "Test description 2", "https://storage.needpix.com/rsynced_images/grocery-2932906_1280.jpg",
-    )
-  ];
-  @Output() grocerySelectedList = new EventEmitter<Grocery>();
-
-  constructor() { }
+  grocerylist: Grocery[];
+  constructor(private groceryService: GroceryService, 
+    private router:Router,
+    private route:ActivatedRoute) { }
 
   ngOnInit(): void {
+    this.grocerylist = this.groceryService.getGroceryList();
   }
-  groceryClicked(index:Grocery){
-    this.grocerySelectedList.emit(index);
-    console.log(index);
+  onNewGrocery(){
+    this.router.navigate(['new'], {relativeTo:this.route})
   }
-
 }

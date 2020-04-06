@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild, ElementRef, Output, EventEmitter } from '@angular/core';
 import { Listitem } from 'src/app/shared/content.model';
+import { ShoppingService } from '../shopping.service';
 
 @Component({
   selector: 'app-listedit',
@@ -10,7 +11,7 @@ export class ListeditComponent implements OnInit {
   @ViewChild('inputName') inputName: ElementRef;
   @ViewChild('inputAmount') inputAmount: ElementRef;
   @Output() inputAdded = new EventEmitter<Listitem>();
-  constructor() {
+  constructor(private shoppingService:ShoppingService) {
   }
 
   ngOnInit(): void {
@@ -18,6 +19,6 @@ export class ListeditComponent implements OnInit {
   onAddContent(){
     const name =this.inputName.nativeElement.value;
     const amount = this.inputAmount.nativeElement.value;
-    this.inputAdded.emit({name, amount})
+    this.shoppingService.listAdd({name, amount})
   }
 }

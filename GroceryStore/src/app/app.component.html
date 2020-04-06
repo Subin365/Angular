@@ -1,11 +1,6 @@
 <app-header (pageselected)="page = $event"></app-header>
 <div class="container">
-  <div *ngIf = "page === 'Grocery'" class="row">
-    <div class="col-md-12">
-      <app-grocery></app-grocery>
-    </div>
-  </div>
-  <div *ngIf = "page === 'Shoppinglist'" class="row">
-    <app-shoppinglist></app-shoppinglist>
+  <div class="col-md-12">
+    <router-outlet></router-outlet>
   </div>
 </div>
