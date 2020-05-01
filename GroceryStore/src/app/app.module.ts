@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 
 import { AppComponent } from './app.component';
 import { ShoppinglistComponent } from './shoppinglist/shoppinglist.component';
@@ -14,6 +15,7 @@ import { ShoppingService } from './shoppinglist/shopping.service';
 import { AppRoutingModule } from './app-routing.module';
 import { GrocerystartComponent } from './grocery/grocerystart/grocerystart.component';
 import { GroceryEditComponent } from './grocery/grocery-edit/grocery-edit.component';
+import { GroceryService } from './grocery/grocey.service';
 
 @NgModule({
   declarations: [
@@ -31,9 +33,12 @@ import { GroceryEditComponent } from './grocery/grocery-edit/grocery-edit.compon
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule,
+    ReactiveFormsModule
+
   ],
-  providers: [ShoppingService],
+  providers: [ShoppingService,GroceryService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

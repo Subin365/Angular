@@ -1,0 +1,28 @@
+<div class=" container text-center">
+    <div class="col-md-6 col-md-offset-3 text-left">
+        <h3>Login</h3>
+        <form (ngSubmit)="onSubmitLogin(f)" #f="ngForm">
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label for="name">Email</label>
+                        <input type="email" id="email" name="email" class="form-control" ngModel>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" id="password" class="form-control" name="password" ngModel>
+                    </div>
+                </div>
+            </div>
+            <div class="row col-sm-2">
+                <button class="btn btn-primary" type="submit">Login</button>
+            </div>
+            <div class="row col-sm-2" *ngIf="signup">
+                <button class="btn btn-success" type="button" (click)="onSignup()">Signup</button>
+            </div>
+        </form>
+    </div>
+    <br>
+</div>

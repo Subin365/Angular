@@ -1,0 +1,85 @@
+<!-- <mat-form-field>
+  <input type="text" matInput [matAutocomplete]="auto">
+</mat-form-field>
+
+<mat-autocomplete #auto="matAutocomplete">
+  <mat-option *ngFor="let option of options" [value]="option">{{option}}</mat-option>
+</mat-autocomplete> -->
+
+<!-- <form >
+  <mat-form-field>
+     <input type = "text" 
+        placeholder = "US State" 
+        aria-label = "Number" 
+        matInput 
+        [formControl] = "myControl" 
+        [matAutocomplete] = "auto">
+     <mat-autocomplete #auto = "matAutocomplete">
+        <mat-option *ngFor = "let state of states" [value] = "state.value">
+           {{state.display}}
+        </mat-option>
+     </mat-autocomplete>
+  </mat-form-field>
+</form> -->
+<!-- 
+<mat-form-field>
+  <input type="text" placeholder="Enter Location" matInput [formControl]="myControl" [matAutocomplete]="auto">
+  <mat-autocomplete #auto="matAutocomplete">
+    <mat-option *ngFor="let option of options" [value]="option">
+      {{option}}
+    </mat-option>
+  </mat-autocomplete>
+</mat-form-field> -->
+<div class="container">
+  <div class="row ">
+    <div class="col-sm-4">
+      <div class="ng-autocomplete">
+        <ng-autocomplete [data]="data1" (selected)='selectEvent($event)'
+          (inputChanged)='onChangeSearch($event)' (inputFocused)='onFocused($event)' [itemTemplate]="itemTemplate"
+          [notFoundTemplate]="notFoundTemplate">
+        </ng-autocomplete>
+
+        <ng-template #itemTemplate let-item>
+          <a [innerHTML]="item"></a>
+        </ng-template>
+
+        <ng-template #notFoundTemplate let-notFound>
+          <div [innerHTML]="notFound"></div>
+        </ng-template>
+      </div>
+    </div>
+    <div class="col-sm-4">
+      <div class="ng-autocomplete">
+        <ng-autocomplete [data]="data2" [searchKeyword]="keyword" (selected)='selectEvent($event)'
+          (inputChanged)='onChangeSearch($event)' (inputFocused)='onFocused($event)' [itemTemplate]="itemTemplate"
+          [notFoundTemplate]="notFoundTemplate">
+        </ng-autocomplete>
+
+        <ng-template #itemTemplate let-item>
+          <a [innerHTML]="item"></a>
+        </ng-template>
+
+        <ng-template #notFoundTemplate let-notFound>
+          <div [innerHTML]="notFound"></div>
+        </ng-template>
+      </div>
+    </div>
+    <div class="col-sm-4">
+      <div class="ng-autocomplete">
+        <ng-autocomplete [data]="data3" [searchKeyword]="keyword" (selected)='selectEvent($event)'
+          (inputChanged)='onChangeSearch($event)' (inputFocused)='onFocused($event)' [itemTemplate]="itemTemplate"
+          [notFoundTemplate]="notFoundTemplate">
+        </ng-autocomplete>
+
+        <ng-template #itemTemplate let-item>
+          <a [innerHTML]="item"></a>
+        </ng-template>
+
+        <ng-template #notFoundTemplate let-notFound>
+          <div [innerHTML]="notFound"></div>
+        </ng-template>
+      </div>
+    </div>
+
+  </div>
+</div>

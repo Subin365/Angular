@@ -13,9 +13,9 @@ const appRoutes: Routes = [
         path: 'grocery', component: GroceryComponent,
         children: [
             { path: '', component: GrocerystartComponent },
-            {path: 'new', component:GroceryEditComponent},
-            { path: ':id', component: GrocerydetailsComponent},
-            {path: ':id/edit', component:GroceryEditComponent},
+            { path: 'new', component: GroceryEditComponent },
+            { path: ':id', component: GrocerydetailsComponent },
+            { path: ':id/edit', component: GroceryEditComponent },
         ]
     },
     { path: 'shopping-list', component: ShoppinglistComponent },

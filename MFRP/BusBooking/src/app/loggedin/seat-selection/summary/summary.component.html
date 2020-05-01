@@ -1,0 +1,95 @@
+<div class="container col-md-12">
+    <div class="row">
+        <h3>Booking Summary</h3>
+    </div>
+    <div class="row">
+        <div class="col-sm-6">
+            BoardingPoint:
+        </div>
+        <div class="col-sm-6">
+            {{boardingPoint}}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-6">
+            Destination:
+        </div>
+        <div class="col-sm-6">
+            {{destinationPoint}}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-6">
+            Date:
+        </div>
+        <div class="col-sm-6">
+            {{date}}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-6">
+            Bus Name:
+        </div>
+        <div class="col-sm-6">
+            {{name}}
+        </div>
+    </div>
+    <form [formGroup]="passengerForm" (ngSubmit)="onSubmit()">
+        <div class="row">
+            <div formArrayName="passengerList">
+                <div class="row" *ngFor="let list of controls; let i = index" [formGroupName]="i"
+                    style="margin-top: 10px;">
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control" formControlName="name">
+                    </div>
+                    <div class="col-sm-2">
+                        <input type="number" class="form-control" [attr.disabled]="disable" formControlName="seatNo">
+                    </div>
+                    <div class="col-sm-3">
+                        <label for="male"> Male:</label>
+                        <input type="radio" id="male" value="male" formControlName="gender">
+                    </div>
+                    <div class="col-sm-3">
+                        <label for="female"> Female:</label>
+                        <input type="radio" id="female" value="female" formControlName="gender">
+                    </div>
+                    <br><br>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-3">
+                Seats selected :
+            </div>
+            <div class="col-sm-2">
+                {{NoOfSeats}}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-3">
+                Fare :
+            </div>
+            <div class="col-sm-2">
+                {{fare}}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-3">
+                Tax :
+            </div>
+            <div class="col-sm-2">
+                {{tax}}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-3">
+                Total :
+            </div>
+            <div class="col-sm-2">
+                {{totalFare}}
+            </div>
+        </div>
+
+        <button class="btn btn-success" type="submit" [disabled]="!passengerForm.valid">Submit</button>
+    </form>
+</div>

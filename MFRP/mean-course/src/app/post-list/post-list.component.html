@@ -1,0 +1,9 @@
+<mat-accordion *ngIf="posts.length > 0">
+  <mat-expansion-panel *ngFor="let x of posts">
+    <mat-expansion-panel-header>
+      {{ x.title }}
+    </mat-expansion-panel-header>
+    {{ x.content }}
+  </mat-expansion-panel>
+</mat-accordion>
+<p class="mat-body-1 info-text" *ngIf="posts.length <= 0">No posts found</p>

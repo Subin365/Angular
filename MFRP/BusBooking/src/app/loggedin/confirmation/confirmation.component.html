@@ -1,0 +1,79 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-6">
+      Date:
+    </div>
+    <div class="col-md-6">
+      {{ date }}
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      Boarding Point:
+    </div>
+    <div class="col-md-6">
+      {{ boardingPoint }}
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      Destination:
+    </div>
+    <div class="col-md-6">
+      {{ destinationPoint }}
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      Bus Name:
+    </div>
+    <div class="col-md-6">
+      {{ busName }}
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      Bus Number:
+    </div>
+    <div class="col-md-6">
+      {{ regNo }}
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      Total seats booked:
+    </div>
+    <div class="col-md-6">
+      {{ totalNoOfSeats }}
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      Total Fare:
+    </div>
+    <div class="col-md-6">
+      {{ fare }}
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      Passenger List:
+    </div>
+    <div class="col-md-6">
+      <div class="row" *ngFor="let x of passengerList">
+        <div class="col-sm-2">
+          Name :
+        </div>
+        <div class="col-sm-4">
+          {{ x.name }}
+        </div>
+        <div class="col-sm-2">
+          Seat No :
+        </div>
+        <div class="col-sm-4">
+          {{ x.seatNo }}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

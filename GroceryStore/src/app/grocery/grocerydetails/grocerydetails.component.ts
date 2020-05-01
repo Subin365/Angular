@@ -24,6 +24,7 @@ export class GrocerydetailsComponent implements OnInit {
         this.groceryItem = this.groceryService.getGroceryById(this.id);
       }
     )
+    console.log(this.groceryItem)
   }
   onShoppingAdd() {
     this.groceryService.addToShoppinglist(this.groceryItem.listItem);
@@ -31,5 +32,9 @@ export class GrocerydetailsComponent implements OnInit {
   onEditGrocery() {
     this.router.navigate(['edit'],{relativeTo:this.route})
     // this.router.navigate(['../',this.id,'edit'],{relativeTo:this.route})
+  }
+  onDeleteGrocery(){
+    this.groceryService.deleteGrocery(this.id);
+    this.router.navigate(['/grocery'])
   }
 }

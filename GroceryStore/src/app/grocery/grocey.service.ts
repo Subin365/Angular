@@ -1,13 +1,16 @@
-import { EventEmitter, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 
 import { Grocery } from './grocery.model';
 import { Listitem } from '../shared/content.model';
 import { ShoppingService } from '../shoppinglist/shopping.service';
+import { Subject } from 'rxjs';
 
 @Injectable()
 export class GroceryService {
+
+    groceryUpdated = new Subject<Grocery[]>();
+
     constructor(private shoppinglistService:ShoppingService){};
-    groceryClicked = new EventEmitter<Grocery>();
     private grocerylist: Grocery[] = [
         new Grocery(
             "test name 1",
@@ -32,5 +35,17 @@ export class GroceryService {
     }
     addToShoppinglist(listItem:Listitem[]){
         this.shoppinglistService.addListItem(listItem);
+    }
+    addGroceryList(grocery:Grocery){
+        this.grocerylist.push(grocery);
+        this.groceryUpdated.next(this.grocerylist.slice());
+    }
+    updateGrocery(index:number, grocery:Grocery){
+        this.grocerylist[index] = grocery;
+        this.groceryUpdated.next(this.grocerylist.slice())
+    }
+    deleteGrocery(index:number){
+        this.grocerylist.splice(index,1);
+        this.groceryUpdated.next(this.grocerylist.slice());
     }
 }

@@ -2,7 +2,10 @@
     <div class="col-xs-10">
         <hr>
         <ul class="list-group">
-            <a class="list-group-item" style="cursor: pointer;" *ngFor="let index of listitem">{{index.name}}
+            <a class="list-group-item" style="cursor: pointer;" 
+            *ngFor="let index of listitem; let i = index"
+            (click) = "onEditItem(i)"
+            >{{index.name}}
                 ({{index.amount}})</a>
         </ul>
     </div>

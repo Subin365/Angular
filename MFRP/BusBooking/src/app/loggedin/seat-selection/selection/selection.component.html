@@ -1,0 +1,10 @@
+<div class=" container-fluid ">
+    <div class="row body">
+        <div *ngFor="let x of seatsAvailable; let index = index" class="col-sm-3 btn" (click)="onSeatSelected(index)"
+            id={{index}}><img src="assets/image/{{x}}" height="30px" alt="image">
+        </div>
+    </div>
+    <br><br>
+    <p>Selected Seats:</p>
+    <span *ngFor="let x of seatNumber">{{x+1}}, </span>
+</div>

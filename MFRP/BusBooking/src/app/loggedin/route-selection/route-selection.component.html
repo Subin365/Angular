@@ -1,0 +1,93 @@
+<div class="container">
+    <div class="row col-sm-12">
+        Boarding Point
+    </div>
+    <div class="row ">
+        <div class="col-sm-6">
+            <div class="ng-autocomplete">
+                <ng-autocomplete [data]="states" (selected)='onFromStateSelected($event)'
+                    (inputFocused)='onFocused($event)' [itemTemplate]="itemTemplate"
+                    [notFoundTemplate]="notFoundTemplate">
+                </ng-autocomplete>
+
+                <ng-template #itemTemplate let-item>
+                    <a [innerHTML]="item"></a>
+                </ng-template>
+
+                <ng-template #notFoundTemplate let-notFound>
+                    <div [innerHTML]="notFound"></div>
+                </ng-template>
+            </div>
+        </div>
+        <div class="col-sm-6 " [hidden]="!locSelected">
+            <div class="ng-autocomplete">
+                <ng-autocomplete [data]="locations" (selected)='onFromlocationselected($event)'
+                    (inputFocused)='onFocused($event)' [itemTemplate]="itemTemplate"
+                    [notFoundTemplate]="notFoundTemplate">
+                </ng-autocomplete>
+
+                <ng-template #itemTemplate let-item>
+                    <a [innerHTML]="item"></a>
+                </ng-template>
+
+                <ng-template #notFoundTemplate let-notFound>
+                    <div [innerHTML]="notFound"></div>
+                </ng-template>
+            </div>
+        </div>
+    </div>
+    <br><br>
+    <div class="row col-sm-12">
+        Destination
+    </div>
+    <div class="row ">
+        <div class="col-sm-6">
+            <div class="ng-autocomplete">
+                <ng-autocomplete [data]="states" (selected)='onToStateSelected($event)'
+                    (inputFocused)='onFocused($event)' [itemTemplate]="itemTemplate"
+                    [notFoundTemplate]="notFoundTemplate">
+                </ng-autocomplete>
+
+                <ng-template #itemTemplate let-item>
+                    <a [innerHTML]="item"></a>
+                </ng-template>
+
+                <ng-template #notFoundTemplate let-notFound>
+                    <div [innerHTML]="notFound"></div>
+                </ng-template>
+            </div>
+        </div>
+        <div class="col-sm-6 " [hidden]="!desSelected">
+            <div class="ng-autocomplete">
+                <ng-autocomplete [data]="destinations" (selected)='onTolocationselected($event)'
+                    (inputFocused)='onFocused($event)' [itemTemplate]="itemTemplate"
+                    [notFoundTemplate]="notFoundTemplate">
+                </ng-autocomplete>
+
+                <ng-template #itemTemplate let-item>
+                    <a [innerHTML]="item"></a>
+                </ng-template>
+
+                <ng-template #notFoundTemplate let-notFound>
+                    <div [innerHTML]="notFound"></div>
+                </ng-template>
+            </div>
+        </div>
+    </div>
+    <br><br>
+    <div class="row col-sm-offset-4">
+        <form (ngsubmit)=onBusSearch(f) #f="ngForm">
+            <div class="row form-group col-sm-3">
+                <input type="date" name="date" id="date" ngModel class="form-control">
+            </div>
+            <div class="row col-sm-12">
+            <button class="btn btn-success " type="submit" (click)="onBusSearch(f)">Search your Bus</button>
+            </div>
+        </form>
+        <br><br>
+        <div *ngFor="let x of availableBus">
+            <a (click)="onBusSelect(x)" type="submit" class="btn">{{x}}</a>
+        </div>
+        <div *ngIf="busNotFound"> OOPS...NO BUS FOUND</div>
+    </div>
+</div>
