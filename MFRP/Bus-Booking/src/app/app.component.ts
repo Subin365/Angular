@@ -1,129 +1,165 @@
 import { Component } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { FormControl, NgForm } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
+import { map } from 'rxjs/operators';
+import { AppService } from './app.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
   title = 'Bus-Booking';
-   data1 = [
-     "Thiruvananthapuram",
- "Kollam",
- "Alappuzha",
- "Pathanamthitta",
- "Kottayam",
- "Idukki",
- "Ernakulam",
- "Thrissur",
- "Palakkad",
- "Malappuram",
- "Kozhikode",
- "Wayanad",
- "Kannur",
- "Kasaragod",
-   ];
-   data3 = [
-    "Thiruvananthapuram",
-"Kollam",
-"Alappuzha",
-"Pathanamthitta",
-"Kottayam",
-"Idukki",
-"Ernakulam",
-"Thrissur",
-"Palakkad",
-"Malappuram",
-"Kozhikode",
-"Wayanad",
-"Kannur",
-"Kasaragod",
+  data1 = [
+    'Thiruvananthapuram',
+    'Kollam',
+    'Alappuzha',
+    'Pathanamthitta',
+    'Kottayam',
+    'Idukki',
+    'Ernakulam',
+    'Thrissur',
+    'Palakkad',
+    'Malappuram',
+    'Kozhikode',
+    'Wayanad',
+    'Kannur',
+    'Kasaragod',
+  ];
+  data3 = [
+    'Thiruvananthapuram',
+    'Kollam',
+    'Alappuzha',
+    'Pathanamthitta',
+    'Kottayam',
+    'Idukki',
+    'Ernakulam',
+    'Thrissur',
+    'Palakkad',
+    'Malappuram',
+    'Kozhikode',
+    'Wayanad',
+    'Kannur',
+    'Kasaragod',
   ];
   data2 = [
-    "Thiruvananthapuram",
-"Kollam",
-"Alappuzha",
-"Pathanamthitta",
-"Kottayam",
-"Idukki",
-"Ernakulam",
-"Thrissur",
-"Palakkad",
-"Malappuram",
-"Kozhikode",
-"Wayanad",
-"Kannur",
-"Kasaragod",
+    'Thiruvananthapuram',
+    'Kollam',
+    'Alappuzha',
+    'Pathanamthitta',
+    'Kottayam',
+    'Idukki',
+    'Ernakulam',
+    'Thrissur',
+    'Palakkad',
+    'Malappuram',
+    'Kozhikode',
+    'Wayanad',
+    'Kannur',
+    'Kasaragod',
   ];
-//   myControl = new FormControl();
-  // states;
-  // constructor(){
-  //    this.loadStates();
-  // }
-  // //build list of states as map of key-value pairs
-  // loadStates() {
-  //    var allStates = 'Alabama, Alaska, Arizona, Arkansas, California, Colorado, Connecticut, Delaware,\
-  //       Florida, Georgia, Hawaii, Idaho, Illinois, Indiana, Iowa, Kansas, Kentucky, Louisiana,\
-  //       Maine, Maryland, Massachusetts, Michigan, Minnesota, Mississippi, Missouri, Montana,\
-  //       Nebraska, Nevada, New Hampshire, New Jersey, New Mexico, New York, North Carolina,\
-  //       North Dakota, Ohio, Oklahoma, Oregon, Pennsylvania, Rhode Island, South Carolina,\
-  //       South Dakota, Tennessee, Texas, Utah, Vermont, Virginia, Washington, West Virginia,\
-  //       Wisconsin, Wyoming';
-  //    this.states =  allStates.split(/, +/g).map( function (state) {
-  //       return {
-  //          value: state.toUpperCase(),
-  //          display: state
-  //       };
-  //    });
-  // }
   keyword = 'name';
-  
-  // data = [
-  //    {
-  //      id: 1,
-  //      name: 'Dakota Gaylord PhD',
-  //      address: '14554 Smith Mews'
-  //    },
-  //    {
-  //      id: 2,
-  //      name: 'Maria Legros',
-  //      address: '002 Pagac Drives'
-  //    },
-  //    {
-  //      id: 3,
-  //      name: 'Brandyn Fritsch',
-  //      address: '8542 Lowe Mountain'
-  //    },
-  //    {
-  //      id: 4,
-  //      name: 'Glenna Ward V',
-  //      address: '1260 Oda Summit'
-  //    },
-  //    {
-  //      id: 5,
-  //      name: 'Jamie Veum',
-  //      address: '5017 Lowe Route'
-  //    }
-  // ];
- 
-  constructor() { }
- 
+
+  posts: { id: string; title: string; content: string }[] = [];
+  token: string;
+
+  constructor(private http: HttpClient, private appService: AppService) {}
+
   ngOnInit() {
+    this.getPosts();
   }
- 
+
   selectEvent(item) {
     console.log(item);
   }
- 
+
+  getPosts() {
+    this.http
+      .get<{
+        message: string;
+        posts: any[];
+      }>('http://localhost:3000/api/posts')
+      .pipe(
+        map((responseData) => {
+          return responseData.posts.map((post) => {
+            return {
+              title: post.title,
+              content: post.content,
+              id: post._id,
+            };
+          });
+        })
+      )
+      .subscribe((transfomedData) => {
+        this.posts = transfomedData;
+      });
+  }
+
+  onDelete(id: string) {
+    this.http.delete('http://localhost:3000/api/posts/' + id).subscribe(() => {
+      console.log('Deleted');
+      this.getPosts();
+    });
+  }
+
   onChangeSearch(val: string) {
     // fetch remote data from here
     // And reassign the 'data' which is binded to 'data' property.
   }
-  
-  onFocused(e){
+  onSubmit(form: NgForm) {
+    let postId: string;
+    if (form.invalid) {
+      return;
+    }
+    this.http
+      .post<{ message: string; postId: string }>(
+        'http://localhost:3000/api/posts',
+        {
+          id: null,
+          title: form.value.title,
+          content: form.value.content,
+        }
+      )
+      .subscribe((responseData) => {
+        postId = responseData.postId;
+        console.log('inside' + postId);
+        this.getPosts();
+      });
+    this.posts.push({
+      id: postId,
+      title: form.value.title,
+      content: form.value.content,
+    });
+    form.resetForm();
+  }
+
+  onLogin(form: NgForm) {
+    this.http
+      .post<{ token: string }>('http://localhost:3000/api/posts/login ', {
+        email: form.value.email,
+        password: form.value.password,
+      })
+      .subscribe((Response) => {
+        console.log(Response);
+        this.token = Response.token;
+        this.appService.setToken(this.token);
+      });
+  }
+
+  onSignup(form: NgForm) {
+    console.log('signup');
+    this.http
+      .post('http://localhost:3000/api/posts/signup', {
+        email: form.value.email,
+        password: form.value.password,
+      })
+      .subscribe((Response) => {
+        console.log(Response);
+      });
+  }
+
+  onFocused(e) {
     // do something when input is focused
   }
- 
 }
-

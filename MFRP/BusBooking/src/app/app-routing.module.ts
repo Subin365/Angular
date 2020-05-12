@@ -7,26 +7,44 @@ import { RouteSelectionComponent } from './loggedin/route-selection/route-select
 import { SeatSelectionComponent } from './loggedin/seat-selection/seat-selection.component';
 import { PaymentComponent } from './loggedin/payment/payment.component';
 import { ConfirmationComponent } from './loggedin/confirmation/confirmation.component';
-
+import { AuthGuard } from './auth.guard';
 
 const routes: Routes = [
   { path: '', redirectTo: 'loggedin/loggingIn', pathMatch: 'full' },
   {
-    path: 'loggedin', component: LoggedinComponent,
+    path: 'loggedin',
+    component: LoggedinComponent,
     children: [
       { path: 'loggingIn', component: LoggingInComponent },
-      { path: 'routeSelection', component: RouteSelectionComponent },
-      { path: 'seatSelection/:regno/:date', component: SeatSelectionComponent },
-      { path: 'payment/:totalFare', component: PaymentComponent },
-      { path: 'confirmation', component: ConfirmationComponent }
-    ]
+      {
+        path: 'routeSelection',
+        component: RouteSelectionComponent,
+        canActivate: [AuthGuard],
+      },
+      {
+        path: 'seatSelection',
+        component: SeatSelectionComponent,
+        canActivate: [AuthGuard],
+      },
+      {
+        path: 'payment/:totalFare',
+        component: PaymentComponent,
+        canActivate: [AuthGuard],
+      },
+      {
+        path: 'confirmation',
+        component: ConfirmationComponent,
+        canActivate: [AuthGuard],
+      },
+    ],
   },
   { path: 'signup', component: SignupComponent },
-  { path: '**', redirectTo: 'loggedin/loggingIn', pathMatch: 'full' }
+  { path: '**', redirectTo: 'loggedin/loggingIn', pathMatch: 'full' },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
+  providers: [AuthGuard],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

@@ -1,2 +1,28 @@
-<p>header works!</p>
-<a href="">hello</a>
+<mat-toolbar color="primary" *ngIf="logginPage">
+  <ul class="nav nav-tabs nav-justified text-center">
+      <li>
+        <button disabled mat-button routerLink="/loggedin/routeSelection">
+          <span routerLinkActive="here">Route Selection</span>
+        </button>
+      </li>
+    <li>
+      <button disabled mat-button routerLink="/loggedin/seatSelection">
+        <span routerLinkActive="here">Seat Selection</span>
+      </button>
+    </li>
+    <li>
+      <button disabled mat-button routerLink="/loggedin/payment/:totalFare">
+        <span routerLinkActive="here">Payment</span>
+      </button>
+    </li>
+    <li>
+      <button disabled mat-button routerLink="/loggedin/confirmation">
+        <span routerLinkActive="here">Booking Summary</span>
+      </button>
+    </li>
+    <li>
+      <button mat-button (click) = "onLogout()">Log Out</button>
+    </li>
+  </ul>
+</mat-toolbar>
+<br /><br />

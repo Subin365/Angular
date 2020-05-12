@@ -26,11 +26,11 @@ export class ConfirmationComponent implements OnInit {
     this.date = this.loggedInService.date;
     this.fare = this.loggedInService.totalFare;
     this.totalNoOfSeats = this.loggedInService.passengerList.length;
-    this.busDetails = this.loggedInService.getBusDetails(this.loggedInService.regNo);
+    this.busDetails = this.loggedInService.selectedBus;
     this.regNo = this.busDetails.regNo;
     this.boardingPoint = this.busDetails.boardingPoint;
     this.destinationPoint = this.busDetails.destinationPoint;
-    this.busName = this.busDetails.name; 
+    this.busName = this.busDetails.name;
   }
 
 }

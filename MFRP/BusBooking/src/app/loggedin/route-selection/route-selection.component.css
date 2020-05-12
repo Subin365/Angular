@@ -4,3 +4,8 @@
 /* *{
     background-image: url("../../../assets/image/download.png");
 } */
+.spinner{
+margin: 50px;
+height: 20px;
+}
+

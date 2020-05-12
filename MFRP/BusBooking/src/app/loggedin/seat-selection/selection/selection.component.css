@@ -1,7 +1,10 @@
-.body{
-    border: 1px solid red;
-    border-radius: 30px;
+.body {
+  border: 1px solid red;
+  border-radius: 30px;
 }
-.clicked{
-    background-color: turquoise;
+.clicked {
+  background-color: turquoise;
+}
+.booked-seat {
+  cursor: not-allowed;
 }

@@ -36,7 +36,7 @@ export class SummaryComponent implements OnInit, OnDestroy {
   subscription:Subscription;
 
   ngOnInit(): void {
-    this.busDetails = this.loggedInService.getBusDetails(this.seatSelectionService.regNo)
+    this.busDetails = this.loggedInService.selectedBus;
     this.name = this.busDetails.name;
     this.date = this.seatSelectionService.date;
     this.destinationPoint = this.busDetails.destinationPoint;
@@ -119,7 +119,7 @@ export class SummaryComponent implements OnInit, OnDestroy {
     });
   }
   updateFareDetails(){
-    this.fare = this.loggedInService.getFareDetails(this.seatNumber, this.date, this.seatSelectionService.regNo)
+    this.fare = this.loggedInService.getFareDetails(this.seatNumber, this.loggedInService.date, this.loggedInService.regNo)
     this.tax = this.fare*(5/100);
     this.totalFare = this.tax+this.fare
     this.loggedInService.totalFare = this.totalFare;
@@ -129,7 +129,7 @@ export class SummaryComponent implements OnInit, OnDestroy {
 
   onSubmit() {
     this.loggedInService.onInitiatePayment(this.passengerForm.value.passengerList)
-    this.router.navigate(['../../../payment',this.totalFare],{relativeTo:this.route})
+    this.router.navigate(['../payment',this.totalFare],{relativeTo:this.route})
   }
 
 

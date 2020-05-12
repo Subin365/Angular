@@ -8,11 +8,11 @@
 
 <!-- <form >
   <mat-form-field>
-     <input type = "text" 
-        placeholder = "US State" 
-        aria-label = "Number" 
-        matInput 
-        [formControl] = "myControl" 
+     <input type = "text"
+        placeholder = "US State"
+        aria-label = "Number"
+        matInput
+        [formControl] = "myControl"
         [matAutocomplete] = "auto">
      <mat-autocomplete #auto = "matAutocomplete">
         <mat-option *ngFor = "let state of states" [value] = "state.value">
@@ -21,7 +21,7 @@
      </mat-autocomplete>
   </mat-form-field>
 </form> -->
-<!-- 
+<!--
 <mat-form-field>
   <input type="text" placeholder="Enter Location" matInput [formControl]="myControl" [matAutocomplete]="auto">
   <mat-autocomplete #auto="matAutocomplete">
@@ -31,12 +31,17 @@
   </mat-autocomplete>
 </mat-form-field> -->
 <div class="container">
-  <div class="row ">
+  <!-- <div class="row">
     <div class="col-sm-4">
       <div class="ng-autocomplete">
-        <ng-autocomplete [data]="data1" (selected)='selectEvent($event)'
-          (inputChanged)='onChangeSearch($event)' (inputFocused)='onFocused($event)' [itemTemplate]="itemTemplate"
-          [notFoundTemplate]="notFoundTemplate">
+        <ng-autocomplete
+          [data]="data1"
+          (selected)="selectEvent($event)"
+          (inputChanged)="onChangeSearch($event)"
+          (inputFocused)="onFocused($event)"
+          [itemTemplate]="itemTemplate"
+          [notFoundTemplate]="notFoundTemplate"
+        >
         </ng-autocomplete>
 
         <ng-template #itemTemplate let-item>
@@ -50,9 +55,15 @@
     </div>
     <div class="col-sm-4">
       <div class="ng-autocomplete">
-        <ng-autocomplete [data]="data2" [searchKeyword]="keyword" (selected)='selectEvent($event)'
-          (inputChanged)='onChangeSearch($event)' (inputFocused)='onFocused($event)' [itemTemplate]="itemTemplate"
-          [notFoundTemplate]="notFoundTemplate">
+        <ng-autocomplete
+          [data]="data2"
+          [searchKeyword]="keyword"
+          (selected)="selectEvent($event)"
+          (inputChanged)="onChangeSearch($event)"
+          (inputFocused)="onFocused($event)"
+          [itemTemplate]="itemTemplate"
+          [notFoundTemplate]="notFoundTemplate"
+        >
         </ng-autocomplete>
 
         <ng-template #itemTemplate let-item>
@@ -66,9 +77,15 @@
     </div>
     <div class="col-sm-4">
       <div class="ng-autocomplete">
-        <ng-autocomplete [data]="data3" [searchKeyword]="keyword" (selected)='selectEvent($event)'
-          (inputChanged)='onChangeSearch($event)' (inputFocused)='onFocused($event)' [itemTemplate]="itemTemplate"
-          [notFoundTemplate]="notFoundTemplate">
+        <ng-autocomplete
+          [data]="data3"
+          [searchKeyword]="keyword"
+          (selected)="selectEvent($event)"
+          (inputChanged)="onChangeSearch($event)"
+          (inputFocused)="onFocused($event)"
+          [itemTemplate]="itemTemplate"
+          [notFoundTemplate]="notFoundTemplate"
+        >
         </ng-autocomplete>
 
         <ng-template #itemTemplate let-item>
@@ -80,6 +97,84 @@
         </ng-template>
       </div>
     </div>
-
+  </div> -->
+  <form (ngSubmit)="onSignup(form)" #form="ngForm">
+    <mat-form-field>
+      <input
+        type="email"
+        matInput
+        #email="ngModel"
+        name="email"
+        ngModel
+        required
+        email
+        placeholder="Email here"
+      />
+      <mat-error *ngIf="email.invalid">Error found</mat-error>
+    </mat-form-field>
+    <br />
+    <mat-form-field>
+      <input
+        type="password"
+        matInput
+        #password="ngModel"
+        name="password"
+        ngModel
+        required
+        placeholder="Password here"
+      />
+      <mat-error *ngIf="password.invalid">Error found</mat-error>
+    </mat-form-field>
+    <br />
+    <button mat-raised-button color="accent">Signup</button>
+    <button mat-raised-button color="accent" type="button" (click) = "onLogin(form)">Login</button>
+  </form>
+  <div class="row">
+    <form (ngSubmit)="onSubmit(f)" #f="ngForm">
+      <mat-form-field>
+        <input
+          type="text"
+          matInput
+          #title="ngModel"
+          name="title"
+          ngModel
+          required
+          placeholder="Title here"
+        />
+        <mat-error *ngIf="title.invalid">Error found</mat-error>
+      </mat-form-field>
+      <br />
+      <mat-form-field>
+        <input
+          type="text"
+          matInput
+          #content="ngModel"
+          name="content"
+          ngModel
+          required
+          placeholder="Content here"
+        />
+        <mat-error *ngIf="content.invalid">Error found</mat-error>
+      </mat-form-field>
+      <br />
+      <button mat-raised-button color="accent">submit</button>
+    </form>
+    <mat-accordion *ngIf="posts.length > 0">
+      <mat-expansion-panel *ngFor="let x of posts">
+        <mat-expansion-panel-header>
+          {{ x.title }}
+        </mat-expansion-panel-header>
+        <p>
+          {{ x.content }}
+        </p>
+        <mat-action-row>
+          <button mat-button color="primary">Edit</button>
+          <button mat-button color="warn" (click)="onDelete(x.id)">
+            Delete
+          </button>
+        </mat-action-row>
+      </mat-expansion-panel>
+    </mat-accordion>
+    <p *ngIf="posts.length <= 0">No posts</p>
   </div>
 </div>
